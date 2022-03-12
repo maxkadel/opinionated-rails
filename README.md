@@ -1,11 +1,12 @@
 # README
+[![CircleCI](https://circleci.com/gh/maxkadel/opinionated-rails.svg?style=svg)](https://app.circleci.com/pipelines/github/maxkadel/opinionated-rails?branch=main&filter=all)
+
 [![Rails Style Guide](https://img.shields.io/badge/code_style-rubocop-brightgreen.svg)](https://github.com/rubocop/rubocop-rails)
 
 ### Dependencies
 * Ruby 3.0.3
 * Rails 7.0.2
 * Bundler 2.2.32
----
 * psql 14.2
 * npm 8.5.2
 * yarn 1.22.17
@@ -126,4 +127,4 @@ bundle install
   * Add Rubocop badge to readme
 * Run rubocop autocorrect and get rubocop green
 * Add Capybara to enable system tests
-* Add CircleCI 
+* Add CircleCI
