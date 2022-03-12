@@ -1,27 +1,40 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+### Dependencies
+* Ruby 3.0.3
+* Rails 7.0.2
+* Bundler 2.2.32
+---
+* psql 14.2
+* npm 8.5.2
+* yarn 1.22.17
 
-Things you may want to cover:
 
-* Ruby version
+### Running in development
+#### First time setup
+* Clone the repository `git clone git@github.com:maxkadel/opinionated-rails.git`
+* Go into application directory `cd opinionated-rails`
+* Install gem bundle `bundle install`
+* Database creation - ensure you have a Postgres service running
+  * `bundle exec rails db:create`
+  * `bundle exec rails db:migrate`
+* Bring up the application - can change how this occurs in `Procfile.dev`
+  * `./bin/dev`
+  * Should be able to see the application at http://localhost:3000/
 
-* System dependencies
+### Running the tests
+#### RSpec tests
+* All the tests - `bundle exec rspec`
+* Single test - `bundle exec rspec spec/path/to/test.rb`
 
-* Configuration
+### Deployment instructions
+This application deploys with Heroku. For info on relevant Heroku commands, see https://devcenter.heroku.com/articles/getting-started-with-rails7#heroku-gems
 
-* Database creation
+```bash
+git push heroku main
+heroku run rake db:migrate
+```
 
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
 ### Building this app
 * create gemset
 ```bash
@@ -89,6 +102,13 @@ bundle lock --add-platform x86_64-linux
 heroku addons:create heroku-postgresql:hobby-dev
 heroku buildpacks:add heroku/ruby  
 heroku buildpacks:add heroku/nodejs
-git add . && git commit -m 'adding Passenger and preparing for production'
+git add . && git commit -m 'Add Passenger and prepare for production'
 git push heroku main
+```
+* Verify that application looks as expected on Heroku
+* Add rspec
+  * Add gem to development and test portion of gemfile
+```bash
+bundle install
+rails generate rspec:install
 ```
