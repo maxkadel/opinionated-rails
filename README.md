@@ -32,6 +32,7 @@ rvm create 3.0.3@opinionated-rails --create
 gem install rails
 ```
 * Ensure we're using recent versions of dependencies
+
 ```bash
 $> ruby -v  
 ruby 3.0.3p157 // you need at least version 3 here  
@@ -42,7 +43,7 @@ $> npm -v
 $> yarn -v  
 1.22.17
 $> psql --version  
-psql (PostgreSQL) 14.2 // let\'s use a production-ready database locally  
+psql (PostgreSQL) 14.2 // lets use a production-ready database locally  
 ```
 
 * create new rails app
@@ -63,4 +64,13 @@ bundle exec rake db:create
 * Start application in development mode
 ```bash
 ./bin/dev
+```
+* Initialize git repository for version control
+```bash
+git init
+git add .
+git commit -m "init"
+git remote add origin git@github.com:maxkadel/opinionated-rails.git
+git branch -M main
+git push -u origin main
 ```
