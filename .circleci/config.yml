@@ -48,6 +48,9 @@ jobs:
           command: 'bundle exec rails db:schema:load --trace'
           name: Database setup
       - run:
+          command: yarn build
+          name: Build javascript assets
+      - run:
           command: yarn build:css
           name: Build css assets
       - ruby/rspec-test:
