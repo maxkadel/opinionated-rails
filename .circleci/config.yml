@@ -1,0 +1,68 @@
+version: 2.1
+orbs:
+  ruby: circleci/ruby@1.4.0
+  node: circleci/node@5.0.0
+jobs:
+  build:
+    docker:
+      - image: cimg/ruby:3.0.3-node
+    steps:
+      - checkout
+      - ruby/install-deps
+      - node/install-packages:
+          pkg-manager: yarn
+  checking:
+    docker:
+      - image: cimg/ruby:3.0.3-node
+    steps:
+      - checkout
+      - ruby/install-deps
+      - ruby/rubocop-check:
+          format: progress
+          label: Inspecting with Rubocop
+  test:
+    docker:
+      - image: cimg/ruby:3.0.3-node
+      - environment:
+          POSTGRES_DB: opinionated_rails_test
+          POSTGRES_PASSWORD: ''
+          POSTGRES_USER: circleci-demo-ruby
+        image: cimg/postgres:14.1
+    environment:
+      BUNDLE_JOBS: '3'
+      BUNDLE_RETRY: '3'
+      PGHOST: 127.0.0.1
+      PGPASSWORD: ''
+      PGUSER: circleci-demo-ruby
+      RAILS_ENV: test
+    parallelism: 3
+    steps:
+      - checkout
+      - ruby/install-deps
+      - node/install-packages:
+          pkg-manager: yarn
+      - run:
+          command: 'dockerize -wait tcp://localhost:5432 -timeout 1m'
+          name: Wait for DB
+      - run:
+          command: 'bundle exec rails db:schema:load --trace'
+          name: Database setup
+      - run:
+          command: yarn build
+          name: Build javascript assets
+      - run:
+          command: yarn build:css
+          name: Build css assets
+      - ruby/rspec-test:
+          include: spec/**/*_spec.rb
+
+# Invoke jobs via workflows
+# See: https://circleci.com/docs/2.0/configuration-reference/#workflows
+workflows:
+  build:
+    jobs:
+      - build
+      - checking
+      - test:
+          requires:
+            - build

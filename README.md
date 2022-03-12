@@ -125,4 +125,5 @@ bundle install
   * Create configuration files - `.rubocop-rails.yml`, `.rubocop.yml`
   * Add Rubocop badge to readme
 * Run rubocop autocorrect and get rubocop green
-* Add Capybara to enable system tests 
+* Add Capybara to enable system tests
+* Add CircleCI 
