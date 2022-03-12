@@ -74,3 +74,21 @@ git remote add origin git@github.com:maxkadel/opinionated-rails.git
 git branch -M main
 git push -u origin main
 ```
+
+* Change application server to passenger
+```bash
+./bin/dev
+```
+
+* Ensure that application can deploy to Heroku
+```bash
+heroku login
+heroku create
+echo "web: bundle exec passenger start -p $PORT --max-pool-size 3" >> Procfile
+bundle lock --add-platform x86_64-linux
+heroku addons:create heroku-postgresql:hobby-dev
+heroku buildpacks:add heroku/ruby  
+heroku buildpacks:add heroku/nodejs
+git add . && git commit -m 'adding Passenger and preparing for production'
+git push heroku main
+```
