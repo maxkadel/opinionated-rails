@@ -1,0 +1,7 @@
+# Put configuration for Rubocop here
+AllCops:
+  TargetRubyVersion: 3.0.3
+  NewCops: enable
+  Exclude:
+    - 'db/schema.rb'
+    - 'vendor/**/*'

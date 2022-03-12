@@ -1,4 +1,5 @@
 # README
+[![Rails Style Guide](https://img.shields.io/badge/code_style-rubocop-brightgreen.svg)](https://github.com/rubocop/rubocop-rails)
 
 ### Dependencies
 * Ruby 3.0.3
@@ -26,6 +27,10 @@
 #### RSpec tests
 * All the tests - `bundle exec rspec`
 * Single test - `bundle exec rspec spec/path/to/test.rb`
+
+#### Code linter - Rubocop
+* To list offenses - `bundle exec rubocop`
+* To auto-correct eligible offenses `bundle exec rubocop -a`
 
 ### Deployment instructions
 This application deploys with Heroku. For info on relevant Heroku commands, see https://devcenter.heroku.com/articles/getting-started-with-rails7#heroku-gems
@@ -112,3 +117,10 @@ git push heroku main
 bundle install
 rails generate rspec:install
 ```
+* Add rubocop
+  * Add gems to development and test portion of gemfile
+```bash
+bundle install
+```
+  * Create configuration files - `.rubocop-rails.yml`, `.rubocop.yml`
+  * Add Rubocop badge to readme
