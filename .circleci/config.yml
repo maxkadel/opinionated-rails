@@ -27,7 +27,7 @@ jobs:
           POSTGRES_DB: opinionated_rails_test
           POSTGRES_PASSWORD: ''
           POSTGRES_USER: circleci-demo-ruby
-        image: cimg/postgres:14.1.0
+        image: cimg/postgres:14.1
     environment:
       BUNDLE_JOBS: '3'
       BUNDLE_RETRY: '3'
