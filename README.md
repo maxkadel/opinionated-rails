@@ -124,3 +124,4 @@ bundle install
 ```
   * Create configuration files - `.rubocop-rails.yml`, `.rubocop.yml`
   * Add Rubocop badge to readme
+* Run rubocop autocorrect
