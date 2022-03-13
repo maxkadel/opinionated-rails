@@ -53,13 +53,15 @@ So, this application is intended to be my own opinion on what every Rails app sh
       * `app/assets/builds/application.js`
       * `app/assets/builds/application.js.map`
   * Third party integrations
-    * CircleCI - enable on your CircleCI dashboard
+    * CircleCI - enable on your CircleCI dashboard - https://app.circleci.com/projects/project-dashboard/github/YOUR_GH_ORGANIZATION_HERE/
+      * Click on "Set Up Project" button
+      * Select "Use the `.circleci/config.yml` in my repo" and for "From which branch" select "main"
     * Go to CodeClimate and add your repository https://codeclimate.com/oss/dashboard
     * Go to https://codeclimate.com/repos/YOUR_REPO_ID_HERE/settings/test_reporter and copy your application's Test Reporter ID
     * Go to the project settings on CircleCI and add a new environment variable `CC_TEST_REPORTER_ID` and for the value put the Test Reporter ID you copied in the previous step.
     * Go to https://codeclimate.com/github/YOUR_GH_ORGANIZATION_HERE/YOUR_APP_NAME_HERE/badges#test-coverage-markdown Replace the badges in this readme with those (the CircleCI ones should have been taken care of with the copy-paste steps above)
 * If you want to use Heroku for deploys, run `heroku create`
-
+* You can see what these changes look like with this example - https://github.com/maxkadel/my-app/compare/main...changing_app_name 
 ### Running in development
 These instructions are for if you want to play with this app as-is, without trying to create your own based on it.
 
