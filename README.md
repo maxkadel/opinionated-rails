@@ -45,6 +45,7 @@ So, this application is intended to be my own opinion on what every Rails app sh
 * Change names - NOTE: All of the find-and-replaces should use match case
   * Remove this section of the README and the Building This App section
   * replace `maxkadel/opinionated-rails` with `your-gh-organization/my-app`
+  * replace `opinionated-rails` with `my-app`
   * replace `opinionated_rails` with `my_app`
   * replace `OpinionatedRails` with `MyApp`
   * replace `OPINIONATED_RAILS` with `MY_APP`
@@ -60,6 +61,7 @@ So, this application is intended to be my own opinion on what every Rails app sh
     * Go to https://codeclimate.com/repos/YOUR_REPO_ID_HERE/settings/test_reporter and copy your application's Test Reporter ID
     * Go to the project settings on CircleCI and add a new environment variable `CC_TEST_REPORTER_ID` and for the value put the Test Reporter ID you copied in the previous step.
     * Go to https://codeclimate.com/github/YOUR_GH_ORGANIZATION_HERE/YOUR_APP_NAME_HERE/badges#test-coverage-markdown Replace the badges in this readme with those (the CircleCI ones should have been taken care of with the copy-paste steps above)
+* Follow the instructions for running in development, from the gem bundle step
 * If you want to use Heroku for deploys, run
 ```bash
 heroku create
