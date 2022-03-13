@@ -54,32 +54,32 @@ jobs:
       - run:
           command: yarn build:css
           name: Build css assets
-    - run:
-        name: Setup Code Climate test-reporter
-        command: |
-          # download test reporter as a static binary
-          curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
-          chmod +x ./cc-test-reporter
-          ./cc-test-reporter before-build
-    - run:
-        command: |
-          mkdir -p /tmp/test-results/rspec
-          TESTFILES=$(circleci tests glob spec/**/*_spec.rb | circleci tests split --split-by=timings)
-          bundle exec rspec $TESTFILES --profile 10 --format RspecJunitFormatter --out /tmp/test-results/rspec/results.xml --format progress
-        name: RSpec Tests
-    - store_test_results:
-        path: /tmp/test-results/rspec
-    - store_artifacts:
-        destination: test-results
-        path: /tmp/test-results/rspec
-    - run:
-        name: Format Code Climate Test Coverage
-        command: |
-          ./cc-test-reporter format-coverage -t simplecov -o "coverage/codeclimate.$CIRCLE_NODE_INDEX.json"
-    - run:
-        command: |
-          ./cc-test-reporter sum-coverage --output - codeclimate.*.json | ./cc-test-reporter upload-coverage --debug --input -
-    # 
+      - run:
+          name: Setup Code Climate test-reporter
+          command: |
+            # download test reporter as a static binary
+            curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+            chmod +x ./cc-test-reporter
+            ./cc-test-reporter before-build
+      - run:
+          command: |
+            mkdir -p /tmp/test-results/rspec
+            TESTFILES=$(circleci tests glob spec/**/*_spec.rb | circleci tests split --split-by=timings)
+            bundle exec rspec $TESTFILES --profile 10 --format RspecJunitFormatter --out /tmp/test-results/rspec/results.xml --format progress
+          name: RSpec Tests
+      - store_test_results:
+          path: /tmp/test-results/rspec
+      - store_artifacts:
+          destination: test-results
+          path: /tmp/test-results/rspec
+      - run:
+          name: Format Code Climate Test Coverage
+          command: |
+            ./cc-test-reporter format-coverage -t simplecov -o "coverage/codeclimate.$CIRCLE_NODE_INDEX.json"
+      - run:
+          command: |
+            ./cc-test-reporter sum-coverage --output - codeclimate.*.json | ./cc-test-reporter upload-coverage --debug --input -
+    #
     # - run:
     #     name: Send coverage report to Code Climate
     #     command: ./cc-test-reporter after-build -t simplecov
