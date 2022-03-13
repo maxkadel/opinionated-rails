@@ -60,11 +60,17 @@ So, this application is intended to be my own opinion on what every Rails app sh
     * Go to https://codeclimate.com/repos/YOUR_REPO_ID_HERE/settings/test_reporter and copy your application's Test Reporter ID
     * Go to the project settings on CircleCI and add a new environment variable `CC_TEST_REPORTER_ID` and for the value put the Test Reporter ID you copied in the previous step.
     * Go to https://codeclimate.com/github/YOUR_GH_ORGANIZATION_HERE/YOUR_APP_NAME_HERE/badges#test-coverage-markdown Replace the badges in this readme with those (the CircleCI ones should have been taken care of with the copy-paste steps above)
-* If you want to use Heroku for deploys, run `heroku create`
-* You can see what these changes look like with this example - https://github.com/maxkadel/my-app/compare/main...changing_app_name 
+* If you want to use Heroku for deploys, run
+```bash
+heroku create
+heroku addons:create heroku-postgresql:hobby-dev
+heroku buildpacks:add heroku/ruby  
+heroku buildpacks:add heroku/nodejs
+```
+* You can see what these changes look like with this example - https://github.com/maxkadel/my-app/compare/main...changing_app_name
+
 ### Running in development
 These instructions are for if you want to play with this app as-is, without trying to create your own based on it.
-
 
 #### First time setup
 * Clone the repository `git clone git@github.com:maxkadel/opinionated-rails.git`
