@@ -31,7 +31,7 @@ jobs:
     environment:
       BUNDLE_JOBS: '3'
       BUNDLE_RETRY: '3'
-      CC_TEST_REPORTER_ID: 133a22aca6afbaed41750c2b71abb7f384f3c54fdbd74322cdbd417277b24933
+      # CC_TEST_REPORTER_ID: 133a22aca6afbaed41750c2b71abb7f384f3c54fdbd74322cdbd417277b24933
       PGHOST: 127.0.0.1
       PGPASSWORD: ''
       PGUSER: circleci-demo-ruby
@@ -67,6 +67,8 @@ jobs:
       - run:
           name: Send coverage report to Code Climate
           command:
+              # NOTE: You may get a Warning that the coverage report has previously been sent, but it does not
+              # appear to actually send without this command
               ./cc-test-reporter after-build -t simplecov
 
 # Invoke jobs via workflows
