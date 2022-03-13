@@ -67,22 +67,34 @@ jobs:
             TESTFILES=$(circleci tests glob spec/**/*_spec.rb | circleci tests split --split-by=timings)
             bundle exec rspec $TESTFILES --profile 10 --format RspecJunitFormatter --out /tmp/test-results/rspec/results.xml --format progress
           name: RSpec Tests
+      - run:
+          name: Format Code Climate Test Coverage
+          command: |
+            ./cc-test-reporter format-coverage -t simplecov -o "coverage/codeclimate.$CIRCLE_NODE_INDEX.json"
+      - persist_to_workspace:
+          root: coverage
+          paths:
+            - codeclimate.*.json
       - store_test_results:
           path: /tmp/test-results/rspec
       - store_artifacts:
           destination: test-results
           path: /tmp/test-results/rspec
+
+  upload-coverage:
+    docker:
+      - image: cimg/ruby:3.0.3-node
+    steps:
+      - attach_workspace:
+          at: coverage
       - run:
-          name: Format Code Climate Test Coverage
+          name: Install Code Climate Test Reporter
           command: |
-            ./cc-test-reporter format-coverage -t simplecov -o "coverage/codeclimate.$CIRCLE_NODE_INDEX.json"
+            curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+            chmod +x ./cc-test-reporter
       - run:
           command: |
             ./cc-test-reporter sum-coverage --output - coverage/codeclimate.*.json | ./cc-test-reporter upload-coverage --debug --input -
-    #
-    # - run:
-    #     name: Send coverage report to Code Climate
-    #     command: ./cc-test-reporter after-build -t simplecov
 
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
@@ -94,3 +106,6 @@ workflows:
       - test:
           requires:
             - build
+      - upload-coverage:
+          requires:
+            - test
