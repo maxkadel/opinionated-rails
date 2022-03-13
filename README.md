@@ -33,7 +33,37 @@ So, this application is intended to be my own opinion on what every Rails app sh
 * A rudimentary Welcome controller, route, and view, so that we can ensure that the application can deploy and run tests
 * SimpleCov for code coverage
 
+#### How to create a new app based on this app
+* Decide on a name for your new application - for example purposes, let's call it `my-app`
+* Clone the repository `git clone git@github.com:maxkadel/opinionated-rails.git`
+* Make the directory for the new application `mkdir my-app`
+* Copy the application recursively to new app's location `cp -r opinionated-rails/* my-app`
+* Copy hidden files and directories to new app's location (on Mac at least these are not copied with command above, this may differ based on operating system) `cp -r opinionated-rails/.[^.]* my-app`
+* Go into the new application directory `cd my-app`
+* Remove existing `.git` directory `rm -rf .git` (I don't know if this technically voids some license, but I hereby give you my blessing, maybe just throw a note somewhere about what you started from.)
+* Start tracking again - for GitHub, follow these instructions -https://docs.github.com/en/get-started/importing-your-projects-to-github/importing-source-code-to-github/adding-locally-hosted-code-to-github#adding-a-local-repository-to-github-with-github-cli
+* Change names - NOTE: All of the find-and-replaces should use match case
+  * Remove this section of the README and the Building This App section
+  * replace `maxkadel/opinionated-rails` with `your-gh-organization/my-app`
+  * replace `opinionated_rails` with `my_app`
+  * replace `OpinionatedRails` with `MyApp`
+  * replace `OPINIONATED_RAILS` with `MY_APP`
+  * remove the node_modules directory, the yarn.lock file, and the three files in `app/assets/builds`
+      * `app/assets/builds/application.css`
+      * `app/assets/builds/application.js`
+      * `app/assets/builds/application.js.map`
+  * Third party integrations
+    * CircleCI - enable on your CircleCI dashboard
+    * Go to CodeClimate and add your repository https://codeclimate.com/oss/dashboard
+    * Go to https://codeclimate.com/repos/YOUR_REPO_ID_HERE/settings/test_reporter and copy your application's Test Reporter ID
+    * Go to the project settings on CircleCI and add a new environment variable `CC_TEST_REPORTER_ID` and for the value put the Test Reporter ID you copied in the previous step.
+    * Go to https://codeclimate.com/github/YOUR_GH_ORGANIZATION_HERE/YOUR_APP_NAME_HERE/badges#test-coverage-markdown Replace the badges in this readme with those (the CircleCI ones should have been taken care of with the copy-paste steps above)
+* If you want to use Heroku for deploys, run `heroku create`
+
 ### Running in development
+These instructions are for if you want to play with this app as-is, without trying to create your own based on it.
+
+
 #### First time setup
 * Clone the repository `git clone git@github.com:maxkadel/opinionated-rails.git`
 * Go into application directory `cd opinionated-rails`
