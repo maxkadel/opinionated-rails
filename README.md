@@ -11,6 +11,22 @@
 * npm 8.5.2
 * yarn 1.22.17
 
+### What is this app, anyway?
+#### Why?
+I have found that sometimes I want to play with making a new Rails app, with the knowledge that it may go somewhere, but then again, it may not. I know from experience that having things like testing and a code linter are easier to have at the beginning of a project, rather than adding them in the middle, but adding them separately for each experiment significantly increases the start-up time and cost, and a low start-up cost is a huge benefit of Rails!
+
+So, this application is intended to be my own opinion on what every Rails app should start with. My hope is that each time I want to do a new experiment, I can clone this repository and have most of the things I want ready to roll, rather than having to add all the testing and other infrastructure from scratch.
+
+#### What's been added
+* Postgres database
+* Bootstrap for styling
+* Rubocop as a code linter
+* RSpec for testing
+* Capybara for System tests (not currently set up for Selenium, just uses :rack_test)
+* Passenger for the application server
+* CircleCI for continuous integration
+* Procfiles that work for development and deployment with Heroku. I'm not positive how well they would work with other stacks.
+* A rudimentary Welcome controller, route, and view, so that we can ensure that the application can deploy and run tests
 
 ### Running in development
 #### First time setup
