@@ -3,6 +3,10 @@
 
 [![Rails Style Guide](https://img.shields.io/badge/code_style-rubocop-brightgreen.svg)](https://github.com/rubocop/rubocop-rails)
 
+[![Maintainability](https://api.codeclimate.com/v1/badges/b7fa6b1d7864373cf69c/maintainability)](https://codeclimate.com/github/maxkadel/opinionated-rails/maintainability)
+
+[![Test Coverage](https://api.codeclimate.com/v1/badges/b7fa6b1d7864373cf69c/test_coverage)](https://codeclimate.com/github/maxkadel/opinionated-rails/test_coverage)
+
 ### Dependencies
 * Ruby 3.0.3
 * Rails 7.0.2
@@ -27,6 +31,7 @@ So, this application is intended to be my own opinion on what every Rails app sh
 * CircleCI for continuous integration
 * Procfiles that work for development and deployment with Heroku. I'm not positive how well they would work with other stacks.
 * A rudimentary Welcome controller, route, and view, so that we can ensure that the application can deploy and run tests
+* SimpleCov for code coverage
 
 ### Running in development
 #### First time setup
@@ -49,6 +54,15 @@ So, this application is intended to be my own opinion on what every Rails app sh
 * To list offenses - `bundle exec rubocop`
 * To auto-correct eligible offenses `bundle exec rubocop -a`
 
+#### Handy command line checks
+* Validate CircleCI configuration without having to commit it first
+```bash
+circleci config validate
+```
+* Run CodeClimate in debug mode, without reporting
+```bash
+CODECLIMATE_DEBUG=1 codeclimate analyze
+```
 ### Deployment instructions
 This application deploys with Heroku. For info on relevant Heroku commands, see https://devcenter.heroku.com/articles/getting-started-with-rails7#heroku-gems
 
@@ -144,3 +158,4 @@ bundle install
 * Run rubocop autocorrect and get rubocop green
 * Add Capybara to enable system tests
 * Add CircleCI
+* Add SimpleCov and CodeClimate for coverage and other metrics

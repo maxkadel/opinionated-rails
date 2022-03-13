@@ -34,3 +34,7 @@
 !/app/assets/builds/.keep
 
 /node_modules
+
+# Ignore code coverage, but keep the directory.
+/coverage/*
+!/coverage/.keep
