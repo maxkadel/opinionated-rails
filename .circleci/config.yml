@@ -31,6 +31,7 @@ jobs:
     environment:
       BUNDLE_JOBS: '3'
       BUNDLE_RETRY: '3'
+      CC_TEST_REPORTER_ID: 133a22aca6afbaed41750c2b71abb7f384f3c54fdbd74322cdbd417277b24933
       PGHOST: 127.0.0.1
       PGPASSWORD: ''
       PGUSER: circleci-demo-ruby
@@ -55,6 +56,18 @@ jobs:
           name: Build css assets
       - ruby/rspec-test:
           include: spec/**/*_spec.rb
+            # Run coverage report for Code Climate
+      - run:
+          name: Setup Code Climate test-reporter
+          command: |
+              # download test reporter as a static binary
+              curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+              chmod +x ./cc-test-reporter
+              ./cc-test-reporter before-build
+      - run:
+          name: Send coverage report to Code Climate
+          command:
+              ./cc-test-reporter after-build -t simplecov
 
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
