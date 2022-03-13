@@ -31,7 +31,6 @@ jobs:
     environment:
       BUNDLE_JOBS: '3'
       BUNDLE_RETRY: '3'
-      # CC_TEST_REPORTER_ID: 133a22aca6afbaed41750c2b71abb7f384f3c54fdbd74322cdbd417277b24933
       PGHOST: 127.0.0.1
       PGPASSWORD: ''
       PGUSER: circleci-demo-ruby
